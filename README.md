@@ -15,14 +15,15 @@ Tech Soup
 ### Prerequisites
 
 In order to run this script you require:
+
 1. `bash`
 1. `gzip`
 1. `md5`
 1. `gawk`
 
 While first three (`bash`, `gzip` and `md5`) are default to Mac Os, you will require to install `gawk` (GNU Awk)
-in order to run it. Sadly `awk` won't do as there is no conventional way to ignore term separators inside double quotes
-true `awk` (the magic `FPATH` thingy).
+in order to run it. Sadly `awk` won't do as there is no conventional way to ignore term separators inside double quotes 
+in true Awk (the magic `FPATH` thingy).
 
 Whether you use `macports` or `brew` installing should be fairly simple. For Homebrew (http://mxcl.github.io/homebrew/):
     
