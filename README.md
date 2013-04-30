@@ -43,8 +43,8 @@ Benchmarks
 
 ### Configuration
 
- *Processor*: 2 Ghz Intel Core i7
- *Memmory*: 8 Gb 1333 Mgz DDR3
+ _Processor_: 2 Ghz Intel Core i7
+ _Memmory_: 8 Gb 1333 Mgz DDR3
 
 ### Measurement Method
 
@@ -53,21 +53,25 @@ All numbers are obtained with Linux/Unix `time` command
 ### Numbers
 
 Processing ../data/wac_0394_20121015_0041.log.gz
+
 1. `real	161m58.591s`
 1. `user	91m10.060s`
 1. `sys	67m59.805s`
 
 Processing ../data/wac_0394_20121015_0042.log.gz
+
 1. `real	97m15.428s`
 1. `user	54m57.806s`
 1. `sys	40m49.837s`
 
 Processing ../data/wac_0394_20121015_0043.log.gz
+
 1. `real	187m40.101s`
 1. `user	105m20.379s`
 1. `sys	79m2.680s`
 
 Processing ../data/wac_0394_20121015_0044.log.gz
+
 1. `real	65m31.095s`
 1. `user	37m13.850s`
 1. `sys	27m31.892s`
