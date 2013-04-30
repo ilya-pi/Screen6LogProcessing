@@ -43,8 +43,8 @@ Benchmarks
 
 ### Configuration
 
- _Processor_: 2 Ghz Intel Core i7
- _Memmory_: 8 Gb 1333 Mgz DDR3
+ 1. **Processor**: 2 Ghz Intel Core i7
+ 1. **Memmory**: 8 Gb 1333 Mgz DDR3
 
 ### Measurement Method
 
