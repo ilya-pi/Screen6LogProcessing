@@ -1,3 +1,26 @@
 #!/bin/sh
 
-gunzip -c ../data/wac_0394_20121015_0041.log.gz | grep "http://scripts.adrcdn.com/000394/scripts/screenad_launch_9.4.0_scrambled.js" | ./compress_line.sh
+filter_pattern="http://scripts.adrcdn.com/000394/scripts/screenad_launch_9.4.0_scrambled.js"
+processed=processed_files
+
+if [ ! -e "$processed" ] ; then
+    touch "$processed"
+fi
+
+for i in $1/* 
+do
+    if test -f "$i" 
+    then
+       if grep -Fxq "$i" $processed
+       then
+           echo "Already processed $i"
+       else
+           echo "Processing $i"
+           filename=$(basename "$i")
+           processed_filename="${filename%.*.*}".processed.gz
+           time gunzip -c $i | grep $filter_pattern | ./compress_line.sh | gzip -c > $processed_filename
+           echo $i >> $processed
+       fi
+    fi
+done
+
