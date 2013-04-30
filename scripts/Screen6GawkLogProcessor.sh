@@ -1,10 +1,6 @@
 #!/bin/sh
 gawk '
 {	
-command = ("md5 -qs " $15)
-command | getline hash
-close(command)
-
 if (match($15, "Mobi")){
 	deviceType = "Mobile"
 }else if (match($15, "Tablet")){
@@ -15,6 +11,6 @@ if (match($15, "Mobi")){
 	deviceType = "PC"
 }
 
-print $1, "\t", $3, "\t", deviceType, "\t", hash
+print $1, "\t", $3, "\t", deviceType, "\t", $15
 }' FPAT='([^ ]+)|("[^"]+")'
 

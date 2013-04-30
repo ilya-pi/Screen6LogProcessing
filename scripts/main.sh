@@ -18,7 +18,7 @@ do
            echo "Processing $i"
            filename=$(basename "$i")
            processed_filename="${filename%.*.*}".processed.gz
-           time gunzip -c $i | grep $filter_pattern | ./compress_line.sh | gzip -c > $processed_filename
+           time gunzip -c $i | grep $filter_pattern | java Screen6LogProcessor | gzip -c > $processed_filename
            echo $i >> $processed
        fi
     fi
