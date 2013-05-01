@@ -69,17 +69,19 @@ and `95%` percentile, but I didn't go that way here for simplicity's sake.
 | wac_0394_20121015_0046.log.gz      | -                 | `3m41.005s`      | `0m43.871s` | `0m41.839s`        |
 | wac_0394_20121015_0047.log.gz      | -                 | `3m42.607s`      | `0m24.724s` | `0m23.877s`        |
 
-| File                               | `Java` with `pigz`, no  preliminary `grep` | Pure decompression > compression * |
-| :--------------------------------- |:------------------------------------------:|:----------------------------------:|
-| wac_0394_20121015_0041.log.gz      | `0m22.280s`                                | `0m7.358s`                         |
-| wac_0394_20121015_0042.log.gz      | `0m16.901s`                                | `0m7.594s`                         |
-| wac_0394_20121015_0043.log.gz      | `0m25.571s`                                | `0m5.716s`                         |
-| wac_0394_20121015_0044.log.gz      | `0m14.210s`                                | `0m8.258s`                         |
-| wac_0394_20121015_0045.log.gz      | `0m31.299s`                                | `0m8.648s`                         |
-| wac_0394_20121015_0046.log.gz      | `0m16.603s`                                | `0m7.984s`                         |
-| wac_0394_20121015_0047.log.gz      | `0m15.256s`                                | `0m4.175s`                         |
+#### Final numbers
 
-* _Time to do `gunzip | gzip`, not actions inbetween_
+| File                               | `Java` with `pigz`, no  preliminary `grep` | Pure decompression > compression _*_ |
+| :--------------------------------- |:------------------------------------------:|:----------------------------------:|
+| wac_0394_20121015_0041.log.gz      | `**0m22.280s**`                            | `0m7.358s`                         |
+| wac_0394_20121015_0042.log.gz      | `**0m16.901s**`                            | `0m7.594s`                         |
+| wac_0394_20121015_0043.log.gz      | `**0m23.117s**`                            | `0m5.716s`                         |
+| wac_0394_20121015_0044.log.gz      | `**0m12.503s**`                            | `0m8.258s`                         |
+| wac_0394_20121015_0045.log.gz      | `**0m28.822s**`                            | `0m8.648s`                         |
+| wac_0394_20121015_0046.log.gz      | `**0m15.496s**`                            | `0m7.984s`                         |
+| wac_0394_20121015_0047.log.gz      | `**0m15.256s**`                            | `0m4.175s`                         |
+
+_*_ Time to do `pigz -dc | pigz -c`, no actions inbetween
 
 Feedback
 --------

@@ -1,9 +1,24 @@
 import java.io.*;
 
+/**
+ * @author Ilya Pimenov
+ */
 public class Screen6LogProcessor {
 
+	private static String PROCESSED_FILE_SEP = ",";
 	private static String SEPARATOR = "\"-\"";
+	private static String INITIAL_RECORS_SEP = " ";
+	private static int CLIENT_STRING_OFFSET = 5;
 	private static String URL = "http://scripts.adrcdn.com/000394/scripts/screenad_launch_9.4.0_scrambled.js";	
+
+	private static String CLIENT_MOBILE = "Mobile";
+	private static String CLIENT_TABLET = "Tablet";
+	private static String CLIENT_TV = "TV";
+
+	private enum DeviceType{
+		MOBILE, TABLET, TV, PC
+	}
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		String s;
@@ -11,30 +26,30 @@ public class Screen6LogProcessor {
 			if (!s.contains(URL)){
 				continue;
 			}
-			StringBuilder result = new StringBuilder("");
+			StringBuilder result = new StringBuilder();
 
 			int middle = s.indexOf(SEPARATOR);
-			String[] partOne = s.substring(0, middle).split(" ");
+			String[] records = s.substring(0, middle).split(INITIAL_RECORS_SEP);
 
-			result.append(partOne[0]).append(" ").append(partOne[2]).append(" ");
+			result.append(records[0]).append(PROCESSED_FILE_SEP).append(records[2]).append(PROCESSED_FILE_SEP);
 
-			int clientIndex = s.indexOf("\"", middle + 5);
-			String client = s.substring(middle + 5, clientIndex);
+			String clientString = s.substring(middle + CLIENT_STRING_OFFSET, s.indexOf("\"", middle + CLIENT_STRING_OFFSET));
 
-			if (client.contains("Mobile")){
-				result.append("MOBILE");
-			}else if (client.contains("Tablet")){
-				result.append("TABLET");
-			}else if (client.contains("TV")){
-				result.append("TV");
-			}else{
-				result.append("PC");
-			}
-
-			result.append(" ").append(client.hashCode());
+			result.append(detectDeviceType(clientString)).append(PROCESSED_FILE_SEP).append(clientString.hashCode());
 
 			System.out.println(result.toString());
 		}
-		// An empty line or Ctrl-Z terminates the program
 	}
+
+	private static DeviceType detectDeviceType(String clientString){
+		if (clientString.contains(CLIENT_MOBILE)){
+			return DeviceType.MOBILE;
+		}else if (clientString.contains("Tablet")){
+			return DeviceType.TABLET;
+		}else if (clientString.contains("TV")){
+			return DeviceType.TV;
+		}
+		return DeviceType.PC;
+	}
+
 }
