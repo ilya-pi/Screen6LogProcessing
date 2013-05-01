@@ -90,7 +90,7 @@ Final solution consists of a bash script, that handles the framework around log 
 handle a single line of log.
 
 Each time a log file is processed, that fact is stored in the `processed_files` file, that keeps current application state. Whenever 
-you interrupt file proessing and then start over, for each file, it will check whether it was processed already, and whether 
+you interrupt file proessing and then start over, for each file, it will check whether it was processed already, and if 
 it wasn't — pick it up.
 
 When launched you will see application running with an output like:
@@ -132,7 +132,7 @@ Since we are reading from the disk, and writing back to it, and normally that is
 gzipped files and compress them on the fly right back to gzip, after processing was done.
 
 You can see that user agent string is compressed via String.hashCode(), which implementation was specified ever since Java 1.3.1 
-( [spec](http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#hashCode()) ), so it is consistent among different 
+( [spec](http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#hashCode() ), so it is consistent among different 
 implementations and version, meaning that the same user agent met for the second time, will result in exact same hashCode.
 
 I used very simple algorithm to detect device type (based on "user agent string contains this/contains that"), but it can be 
@@ -159,13 +159,13 @@ I got this picture (there aint a single nice shell utility to acquire historical
 
 ![sequential execution](https://github.com/ilya-pi/Screen6LogProcessing/blob/main/Documentation/parallel.png?raw=true)
 
-And overall time to process all seven log files was only **`0m58.741s`** vs `2m23.885s` for sequential log processing. But then `main.sh` would require 
+And overall time to process all seven log files was only `0m58.741s` vs `2m23.885s` for sequential log processing. But then `main.sh` would require 
 some alterations in order to recover nicely after failovers/interruptions.
 
 ### Future
 
 Depending on what the circumstances are, you might customize `nginx`'s `HttpLogModule` (http://wiki.nginx.org/HttpLogModule), to produce output very 
-close to desired, or even write you own module to output precisely what you want, measuring statisticks in realtime, since `nginx` is opensource. But that only if those are your servers and you are using `nginx`.
+close to desired, or even write you own module to output precisely what you want, measuring statistics in realtime, since `nginx` is opensource. But that only if those are your servers and you are using `nginx`.
 
 Feedback
 --------
