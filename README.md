@@ -83,6 +83,19 @@ and `95%` percentile, but I didn't go that way here for simplicity's sake.
 
 _*_ Time to do `pigz -dc | pigz -c`, no actions inbetween
 
+Notes on the code and choices
+-----------------------------
+
+Final solution consists of a bash script, that handles the framework around log processing and a small Java class to 
+handle a single line of log.
+
+Each time a log file is processed, that fact is stored in the `processed_files` file, that keeps current application state. Whenever 
+you interrupt file proessing and then start over, for each file, it will check whether it was processed already, and whether 
+it was not — pick it up.
+
+Since we are reading from the disk, and writing back to it, and normally that is very expensive, I decided to read data from 
+gzipped files and compress them on the fly right back to gzip, after processing was done.
+
 Feedback
 --------
 
