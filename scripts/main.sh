@@ -32,7 +32,7 @@ do
 			echo "Processing $i"
 			filename=$(basename "$i")
 			processed_filename="${filename%.*.*}".processed.gz
-			time gunzip -c $i | grep $filter_pattern | java Screen6LogProcessor | gzip -c > $processed_filename
+			time pigz -dc $i | grep $filter_pattern | java Screen6LogProcessor | pigz -c > $processed_filename
 			echo $i >> $processed
 		fi
 	fi
