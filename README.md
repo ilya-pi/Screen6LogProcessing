@@ -110,13 +110,9 @@ When launched you will see application running with an output like:
 
 Producing output files `wac_0394_20121015_004N.processed.gz`, with content being written in CSV format:
 
-```javascript
-gunzip -c wac_0394_20121015_0041.processed.gz
-...
-
-1350300016,92.154.113.143,PC,450984629
-```
-
+    gunzip -c wac_0394_20121015_0041.processed.gz
+    ...
+    1350300016,92.154.113.143,PC,450984629
     1350300016,95.254.226.216,PC,44881124
     1350300016,95.240.228.122,PC,277624491
     1350300016,78.123.63.173,PC,1146220856
@@ -141,6 +137,28 @@ implementations and version, meaning that the same user agent met for the second
 
 I used very simple algorithm to detect device type (based on "user agent string contains this/contains that"), but it can be 
 adjusted might it won't be accurate enough.
+
+`Gawk` implementation happend to be insanely slow (it took approx an hour plus something for each file), mostly for the reason 
+of system call to `md5` to compute user agent string hashcode. But even without it, execution time was around `5minutes / a file`, which
+is hardly a nice result for such a task.
+
+### Parallel vs Sequential log processing
+
+I was not able to fully utilize my CPU and memmory while performing experiments in a sequential manner, most of the time my cpu graph 
+looked like —
+![sequential execution](https://github.com/ilya-pi/Screen6LogProcessing/blob/main/Documentation/sequential.png?raw=true)
+
+While altering `main.sh` a little: 
+
+1. Adding `&` to a command for processing each log file
+1. `wait` at the end of the script (to wait for all background processes completion)
+1. And launching it all with `nice -n -19`, to give this process advantage compared to other running on the CPU
+
+I got this picture (there aint a single nice shell utility to acquire historical CPU graph) —
+![sequential execution](https://github.com/ilya-pi/Screen6LogProcessing/blob/main/Documentation/parallel.png?raw=true)
+
+And overall time to process all seven log files was only **`0m58.741s`** vs `2m23.885s` for sequential log processing. But then `main.sh` would require 
+some alterations in order to recover nicely after failovers/interruptions. 
 
 Feedback
 --------
