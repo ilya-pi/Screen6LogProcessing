@@ -48,33 +48,20 @@ Benchmarks
 
 ### Measurement Method
 
-All numbers are obtained with Linux/Unix `time` command
+All numbers are obtained with Linux/Unix `time` command. All given times are `real` (in a sense 
+that `time` provides you with `real`, `user` and `sys` times).
 
 ### Numbers
 
-Processing ../data/wac_0394_20121015_0041.log.gz
-
-1. `real	161m58.591s`
-1. `user	91m10.060s`
-1. `sys	67m59.805s`
-
-Processing ../data/wac_0394_20121015_0042.log.gz
-
-1. `real	97m15.428s`
-1. `user	54m57.806s`
-1. `sys	40m49.837s`
-
-Processing ../data/wac_0394_20121015_0043.log.gz
-
-1. `real	187m40.101s`
-1. `user	105m20.379s`
-1. `sys	79m2.680s`
-
-Processing ../data/wac_0394_20121015_0044.log.gz
-
-1. `real	65m31.095s`
-1. `user	37m13.850s`
-1. `sys	27m31.892s`
+| File                               | `gawk` with `md5` | `gawk`, no `md5` | `Java`      |
+| :--------------------------------- |:-----------------:|:----------------:|:-----------:|
+| wac_0394_20121015_0041.log.gz      | `161m58.591s`     | `5m34.306s`      | `0m45.784s` |
+| wac_0394_20121015_0042.log.gz      | `97m15.428s`      | `3m44.732s`      | `0m55.721s` |
+| wac_0394_20121015_0043.log.gz      | `187m40.101s`     | `6m7.504s`       | `0m33.741s` |
+| wac_0394_20121015_0044.log.gz      | `65m31.095s`      | `2m53.047s`      | `0m56.740s` |
+| wac_0394_20121015_0045.log.gz      | -                 | `7m43.135s`      | `0m51.726s` |
+| wac_0394_20121015_0046.log.gz      | -                 | `3m41.005s`      | `0m43.871s` |
+| wac_0394_20121015_0047.log.gz      | -                 | `3m42.607s`      | `0m24.724s` |
 
 Feedback
 --------
