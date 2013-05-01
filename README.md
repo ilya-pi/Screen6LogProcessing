@@ -146,6 +146,7 @@ is hardly a nice result for such a task.
 
 I was not able to fully utilize my CPU and memmory while performing experiments in a sequential manner, most of the time my cpu graph 
 looked like —
+
 ![sequential execution](https://github.com/ilya-pi/Screen6LogProcessing/blob/main/Documentation/sequential.png?raw=true)
 
 While altering `main.sh` a little: 
@@ -155,10 +156,16 @@ While altering `main.sh` a little:
 1. And launching it all with `nice -n -19`, to give this process advantage compared to other running on the CPU
 
 I got this picture (there aint a single nice shell utility to acquire historical CPU graph) —
+
 ![sequential execution](https://github.com/ilya-pi/Screen6LogProcessing/blob/main/Documentation/parallel.png?raw=true)
 
 And overall time to process all seven log files was only **`0m58.741s`** vs `2m23.885s` for sequential log processing. But then `main.sh` would require 
-some alterations in order to recover nicely after failovers/interruptions. 
+some alterations in order to recover nicely after failovers/interruptions.
+
+### Future
+
+Depending on what the circumstances are, you might customize `nginx`'s `HttpLogModule` (http://wiki.nginx.org/HttpLogModule), to produce output very 
+close to desired, or even write you own module to output precisely what you want, measuring statisticks in realtime, since `nginx` is opensource. But that only if those are your servers and you are using `nginx`.
 
 Feedback
 --------
