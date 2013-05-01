@@ -110,9 +110,13 @@ When launched you will see application running with an output like:
 
 Producing output files `wac_0394_20121015_004N.processed.gz`, with content being written in CSV format:
 
-    gunzip -c wac_0394_20121015_0041.processed.gz
-    ...
-    1350300016,92.154.113.143,PC,450984629
+```javascript
+gunzip -c wac_0394_20121015_0041.processed.gz
+...
+
+1350300016,92.154.113.143,PC,450984629
+```
+
     1350300016,95.254.226.216,PC,44881124
     1350300016,95.240.228.122,PC,277624491
     1350300016,78.123.63.173,PC,1146220856
