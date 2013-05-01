@@ -91,10 +91,52 @@ handle a single line of log.
 
 Each time a log file is processed, that fact is stored in the `processed_files` file, that keeps current application state. Whenever 
 you interrupt file proessing and then start over, for each file, it will check whether it was processed already, and whether 
-it was not — pick it up.
+it wasn't — pick it up.
+
+When launched you will see application running with an output like:
+
+    $ ./main.sh ../data/
+    Processing ../data//wac_0394_20121015_0041.log.gz
+    real	0m23.465s
+    user	0m30.717s
+    sys	0m15.337s
+
+    Processing ../data//wac_0394_20121015_0042.log.gz
+    real	0m16.675s
+    user	0m23.879s
+    sys	0m10.157s
+
+    Processing ../data//wac_0394_20121015_0043.log.gz
+
+Producing output files `wac_0394_20121015_004N.processed.gz`, with content being written in CSV format:
+
+    gunzip -c wac_0394_20121015_0041.processed.gz
+    ...
+    1350300016,92.154.113.143,PC,450984629
+    1350300016,95.254.226.216,PC,44881124
+    1350300016,95.240.228.122,PC,277624491
+    1350300016,78.123.63.173,PC,1146220856
+    1350300016,95.225.112.111,PC,277624491
+    1350300016,79.42.68.197,PC,450984629
+    1350300016,87.2.114.186,MOBILE,213370475
+    1350300016,88.39.201.20,PC,1536570949
+    1350300016,195.110.157.186,PC,1831450184
+    1350300016,194.79.184.70,PC,277624491
+    1350300016,95.227.101.14,PC,414569225
+    1350300016,213.26.146.175,PC,1861731761
+    1350300016,109.217.98.41,TABLET,2046881875
+    1350300016,87.24.32.4,PC,101196517
+    1350300016,79.32.74.38,PC,-1067360440
 
 Since we are reading from the disk, and writing back to it, and normally that is very expensive, I decided to read data from 
 gzipped files and compress them on the fly right back to gzip, after processing was done.
+
+You can see that user agent string is compressed via String.hashCode(), which implementation was specified ever since Java 1.3.1 
+( [spec](http://docs.oracle.com/javase/6/docs/api/java/lang/String.html#hashCode()) ), so it is consistent among different 
+implementations and version, meaning that the same user agent met for the second time, will result in exact same hashCode.
+
+I used very simple algorithm to detect device type (based on "user agent string contains this/contains that"), but it can be 
+adjusted might it won't be accurate enough.
 
 Feedback
 --------
